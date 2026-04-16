@@ -26,17 +26,16 @@
             <div class="hero-content">
                 <h1>Опануй нову професію з нуля</h1>
                 <p>Блок з описом переваг платформи. Навчайся у зручний час з найкращими викладачами.</p>
-                <button class="btn-primary">Обрати курс</button>
+                <button class="btn-primary" id="mainCTA" href="#courseContainer">Обрати курс</button>
             </div>
             <div class="hero-image">
-                <div class="placeholder-img">Зображення</div>
+                <div class="placeholder-img"></div>
             </div>
         </section>
 
         <section class="courses container">
             <h2>Популярні курси</h2>
-            <div class="course-grid">
-                
+            <div class="course-grid" id="courseContainer">
                 <article class="card">
                     <div class="card-img"></div>
                     <div class="card-body">
@@ -63,8 +62,30 @@
                         <button class="btn-secondary">Детальніше</button>
                     </div>
                 </article>
-
             </div>
+            <div class="load-more-container">
+    <button id="loadMoreBtn" class="btn-secondary">Показати ще</button>
+</div>
+        </section>
+
+        <section class="contact container">
+            <h2>Зв'язатися з нами</h2>
+            <form id="feedbackForm" class="feedback-form" novalidate>
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Ваше ім'я">
+                    <span class="error-text" id="nameError"></span>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email">
+                    <span class="error-text" id="emailError"></span>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Ваше повідомлення"></textarea>
+                    <span class="error-text" id="messageError"></span>
+                </div>
+                <button type="submit" class="btn-primary">Надіслати</button>
+            </form>
+            <div id="successMessage" class="hidden-msg">повідомлення успішно надіслано</div>
         </section>
     </main>
 
@@ -75,5 +96,6 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>

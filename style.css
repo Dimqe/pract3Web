@@ -36,6 +36,20 @@ body {
     font-weight: bold;
 }
 
+.hidden-msg {
+    display: none;
+    padding: 20px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    margin-top: 20px; 
+}
+
+.show-msg {
+    display: block !important;
+}
+
 .nav-list {
     list-style: none;
     display: flex;
@@ -86,7 +100,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px dashed #999;
 }
 
 
@@ -103,6 +116,63 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
+}
+
+.load-more-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#loadMoreBtn {
+    width: auto;
+    padding: 10px 40px;
+    display: inline-block;
+}
+
+.contact h2 {
+    text-align: center;
+    margin-bottom: 30px; 
+    font-size: 28px;  
+}
+
+.contact {
+    padding: 60px 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.feedback-form input, 
+.feedback-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+.feedback-form textarea {
+    min-height: 120px;
+}
+
+.error-text {
+    color: #e74c3c;
+    font-size: 13px;
+    height: 18px;
 }
 
 .card {
