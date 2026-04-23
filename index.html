@@ -10,83 +10,18 @@
 
     <header class="header">
         <div class="container header-inner">
-            <div class="logo">ОсвітаPro</div>
+            <div class="logo"><a href="#/" class="logo-link" data-page="home" style="text-decoration: none; color: inherit;">ОсвітаPro</a></div>
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li><a href="#">Каталог</a></li>
-                    <li><a href="#">Увійти</a></li>
-                    <li><a href="#" class="btn-outline">Реєстрація</a></li>
+                    <li><a href="#/" class="nav-link" data-page="home">Головна</a></li>
+                    <li><a href="/about" class="nav-link" data-page="about">Про нас</a></li>
+                    <li><a href="/contact" class="nav-link" data-page="contact">Контакти</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <div class="hero-content">
-                <h1>Опануй нову професію з нуля</h1>
-                <p>Блок з описом переваг платформи. Навчайся у зручний час з найкращими викладачами.</p>
-                <button class="btn-primary" id="mainCTA" href="#courseContainer">Обрати курс</button>
-            </div>
-            <div class="hero-image">
-                <div class="placeholder-img"></div>
-            </div>
-        </section>
-
-        <section class="courses container">
-            <h2>Популярні курси</h2>
-            <div class="course-grid" id="courseContainer">
-                <article class="card">
-                    <div class="card-img"></div>
-                    <div class="card-body">
-                        <h3>UX/UI Дизайн</h3>
-                        <p class="price">4 500 грн</p>
-                        <button class="btn-secondary">Детальніше</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="card-img"></div>
-                    <div class="card-body">
-                        <h3>Frontend Розробка</h3>
-                        <p class="price">5 200 грн</p>
-                        <button class="btn-secondary">Детальніше</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="card-img"></div>
-                    <div class="card-body">
-                        <h3>Digital Маркетинг</h3>
-                        <p class="price">3 800 грн</p>
-                        <button class="btn-secondary">Детальніше</button>
-                    </div>
-                </article>
-            </div>
-            <div class="load-more-container">
-    <button id="loadMoreBtn" class="btn-secondary">Показати ще</button>
-</div>
-        </section>
-
-        <section class="contact container">
-            <h2>Зв'язатися з нами</h2>
-            <form id="feedbackForm" class="feedback-form" novalidate>
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Ваше ім'я">
-                    <span class="error-text" id="nameError"></span>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Email">
-                    <span class="error-text" id="emailError"></span>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" name="message" placeholder="Ваше повідомлення"></textarea>
-                    <span class="error-text" id="messageError"></span>
-                </div>
-                <button type="submit" class="btn-primary">Надіслати</button>
-            </form>
-            <div id="successMessage" class="hidden-msg">повідомлення успішно надіслано</div>
-        </section>
     </main>
 
     <footer class="footer">
@@ -96,6 +31,14 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="state.js"></script>
+    <script src="router.js"></script>
+    <script src="main.js"></script>
+    <script>
+        (function() {
+        function init() {  }
+        init();
+    })();       
+    </script>
 </body>
 </html>

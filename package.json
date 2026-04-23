@@ -1,0 +1,22 @@
+{
+  "name": "pract3web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+  "start": "react-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dimqe/pract3Web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Dimqe/pract3Web/issues"
+  },
+  "homepage": "https://github.com/Dimqe/pract3Web#readme"
+}
