@@ -1,4 +1,3 @@
-
 window.state = {
     currentPage: 'home',
     formData: {
@@ -14,29 +13,14 @@ window.state = {
     formSubmitted: false
 };
 
-/**
- * Оновити стан
- * @param {string} key 
- * @param {*} value 
- */
-
 function updateState(key, value) {
     state[key] = value;
-    console.log('стан оновлено:', { key, value });
 }
 
-/**
- * Оновити дані форми
- * @param {Object} formValues - об'єкт з даними форми
- */
 function updateFormData(formValues) {
     state.formData = { ...state.formData, ...formValues };
-    console.log('форму оновлено', state.formData);
 }
 
-/**
- * Очистити дані форми
- */
 function clearFormData() {
     state.formData = {
         name: '',
@@ -44,19 +28,13 @@ function clearFormData() {
         message: ''
     };
     state.formSubmitted = false;
-    console.log('ФОРМА ОЧИЩЕНА');
+
 }
 
-/**
- * Отримати поточний стан
- */
 function getState() {
     return state;
 }
 
-/**
- * Отримати дані форми
- */
 function getFormData() {
     return state.formData;
 }
