@@ -91,7 +91,11 @@ window.setupFormHandlers = function() {
 
 window.initApp = function() {
     console.log('Application initialized');
-    
+
+    if (typeof renderHeader === 'function') renderHeader();
+    if (typeof renderNavigation === 'function') renderNavigation();
+    if (typeof renderFooter === 'function') renderFooter();
+
     initRouter();
 };
 

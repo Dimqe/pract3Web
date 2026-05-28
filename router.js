@@ -56,7 +56,11 @@ function setupNavigation() {
 
             if (!isNaN(page) && page >= 1 && page <= totalPages) {
                 setApiCurrentPage(page);
-                renderCourseCards(filteredCourses);
+                if (typeof window.renderCourseCardsComponent === 'function') {
+                    window.renderCourseCardsComponent(filteredCourses);
+                } else {
+                    renderCourseCards(filteredCourses);
+                }
                 window.scrollTo({ top: document.getElementById('courseContainer').offsetTop - 20, behavior: 'smooth' });
             }
         }
@@ -117,47 +121,6 @@ function addNewCourse() {
     }
 }
 
-function renderHomePage() {
-    const main = document.querySelector('main');
-    main.innerHTML = `
-        <section class="hero container">
-            <div class="hero-content">
-                <h1>Опануй нову професію з нуля </h1>
-                <p>Вивчайте IT з найкращими курсами. Практика, проекти та реальні навички від індустріальних експертів.</p>
-                <button class="btn-primary" id="mainCTA">Обрати курс</button>
-            </div>
-            <div class="hero-image">
-                <div class="placeholder-img"></div>
-            </div>
-        </section>
-
-        <section class="courses container">
-            <h2> Наші IT Курси</h2>
-            
-            <!-- Фільтр по категоріям -->
-            <div class="category-filter">
-                <button class="category-btn active" data-category="Frontend"> Frontend</button>
-                <button class="category-btn" data-category="Backend"> Backend</button>
-                <button class="category-btn" data-category="Design"> Design</button>
-            </div>
-
-            <!-- Спінер завантаження -->
-            <div id="loadingState" class="loading-state">
-                <div class="spinner"></div>
-                <p>Завантажуємо курси...</p>
-            </div>
-
-            <!-- Помилка -->
-            <div id="errorState" class="error-state" style="display: none;"></div>
-
-            <!-- Сітка курсів -->
-            <div id="courseContainer" class="course-grid"></div>
-            <div id="paginationContainer" class="pagination"></div>
-        </section>
-    `;
-
-    loadAndRenderCourses();
-}
 
 async function loadAndRenderCourses() {
     try {
@@ -175,7 +138,12 @@ async function loadAndRenderCourses() {
             loadingState.style.display = 'none';
         }
 
-        renderCourseCards(getFilteredApiCourses());
+        const filtered = getFilteredApiCourses();
+        if (typeof window.renderCourseCardsComponent === 'function') {
+            window.renderCourseCardsComponent(filtered);
+        } else {
+            renderCourseCards(filtered);
+        }
 
         setupCategoryFilters(courses);
 
@@ -228,27 +196,33 @@ function renderCourseCards(courses) {
     const pageCourses = courses.slice(startIndex, startIndex + perPage);
 
     pageCourses.forEach(course => {
-        const card = document.createElement('article');
-        card.className = 'course-card';
-        card.innerHTML = `
-            <div class="course-header">
-                <span class="course-category">${course.categoryIcon} ${course.category}</span>
-                <span class="course-rating"> ${course.rating}</span>
-            </div>
-            <div class="course-body">
-                <h3>${course.title}</h3>
-                <p class="course-description">${course.description}</p>
-                <div class="course-meta">
-                    <span class="course-level"> ${course.level}</span>
-                    <span class="course-students"> ${course.students} студентів</span>
+        let cardEl;
+        if (typeof window.createCourseCard === 'function') {
+            cardEl = window.createCourseCard(course);
+        } else {
+            const card = document.createElement('article');
+            card.className = 'course-card';
+            card.innerHTML = `
+                <div class="course-header">
+                    <span class="course-category">${course.categoryIcon} ${course.category}</span>
+                    <span class="course-rating"> ${course.rating}</span>
                 </div>
-                <div class="course-footer">
-                    <p class="course-price">${course.price}</p>
-                    <button class="btn-secondary">Детальніше</button>
+                <div class="course-body">
+                    <h3>${course.title}</h3>
+                    <p class="course-description">${course.description}</p>
+                    <div class="course-meta">
+                        <span class="course-level"> ${course.level}</span>
+                        <span class="course-students"> ${course.students} студентів</span>
+                    </div>
+                    <div class="course-footer">
+                        <p class="course-price">${course.price}</p>
+                        <button class="btn-secondary">Детальніше</button>
+                    </div>
                 </div>
-            </div>
-        `;
-        courseContainer.appendChild(card);
+            `;
+            cardEl = card;
+        }
+        courseContainer.appendChild(cardEl);
     });
 
     if (paginationContainer) {
@@ -308,83 +282,12 @@ function setupCategoryFilters(allCourses) {
                 course.category === selectedCategory
             );
 
-            renderCourseCards(filteredCourses);
+            if (typeof window.renderCourseCardsComponent === 'function') {
+                window.renderCourseCardsComponent(filteredCourses);
+            } else {
+                renderCourseCards(filteredCourses);
+            }
         });
     });
 }
 
-function renderAboutPage() {
-    const main = document.querySelector('main');
-    main.innerHTML = `
-        <section class="hero container">
-            <div class="hero-content">
-                <h1>Про ОсвітаPro</h1>
-                <p>Ми - провідна освітня платформа, яка допомагає тисячам людей змінити своє життя через якісну освіту.</p>
-            </div>
-            <div class="hero-image">
-                <div class="placeholder-img"></div>
-            </div>
-        </section>
-
-        <section class="about-section container">
-            <h2>Наша місія</h2>
-            <p>Зробити якісну освіту доступною для кожного. Ми вірим, що знання - це найбільша інвестиція.</p>
-            
-            <h2 style="margin-top: 40px;">Чому ми?</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <h3> Досвідчені викладачі</h3>
-                    <p>Наші викладачі - це професіонали з реальним досвідом роботи в галузі.</p>
-                </div>
-                <div class="feature-card">
-                    <h3> Практичне навчання</h3>
-                    <p>Всі курси побудовані на основі реальних проектів та завдань.</p>
-                </div>
-                <div class="feature-card">
-                    <h3> Швидкі результати</h3>
-                    <p>Студенти отримують навички, які потрібні роботодавцям вже сьогодні.</p>
-                </div>
-            </div>
-        </section>
-    `;
-}
-
-function renderContactPage() {
-    const formData = getFormData();
-    const formSubmitted = getState().formSubmitted;
-
-    const main = document.querySelector('main');
-    main.innerHTML = `
-        <section class="hero container">
-            <div class="hero-content">
-                <h1>Зв'язатися з нами</h1>
-                <p>Маєте питання? Напишіть нам, і ми обов'язково відповімо!</p>
-            </div>
-        </section>
-
-        <section class="contact container">
-            <form id="feedbackForm" class="feedback-form" novalidate>
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Ваше ім'я" value="${formData.name || ''}">
-                    <span class="error-text" id="nameError"></span>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Email" value="${formData.email || ''}">
-                    <span class="error-text" id="emailError"></span>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" name="message" placeholder="Ваше повідомлення">${formData.message || ''}</textarea>
-                    <span class="error-text" id="messageError"></span>
-                </div>
-                <button type="submit" class="btn-primary">Надіслати</button>
-            </form>
-            <div id="successMessage" class="hidden-msg ${formSubmitted ? 'show-msg' : ''}">повідомлення успішно надіслано</div>
-        </section>
-    `;
-
-    setTimeout(() => {
-        if (typeof window.setupFormHandlers === 'function') {
-            window.setupFormHandlers();
-        }
-    }, 0);
-}
